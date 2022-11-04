@@ -26,7 +26,7 @@ This should be your LDAP user id.
 
 Login
 ```
-~/ccs/kubectl-ccs login -s  https://api.be.symphony-dev.com/ccs  -t  ${ORG_API_TOKEN}  --insecure-skip-tls-verify
+kubectl ccs login -s  api_server_fqdn  -t  ORG_API_TOKEN  --skip-set-context --insecure-skip-tls-verify
 ```
 Make sure you are in the ccs context.
 ```
