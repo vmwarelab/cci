@@ -1,3 +1,8 @@
+# Make sure you have the following packages. 
+# git sudo curl less redis bat
+
+
+
 ##Enabling kubectl auto completion
 echo 'source /usr/share/bash-completion/bash_completion' >>~/.bashrc
 echo 'source <(kubectl completion bash)' >>~/.bashrc
