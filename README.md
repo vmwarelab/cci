@@ -1,2 +1,0 @@
-# cci
-Cloud Consumption Interface
