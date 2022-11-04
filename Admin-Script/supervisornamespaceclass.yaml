@@ -1,0 +1,11 @@
+
+apiVersion: infrastructure.ccs.vmware.com/v1alpha1
+kind: SupervisorNamespaceClass
+metadata:
+  name: ${SV_NAMESPACE_CLASS}
+spec:
+  description: ${SV_NAMESPACE_CLASS} supervisor namespace class
+  parameters:
+    - name: pods
+      type: Integer
+      default: 40

@@ -1,0 +1,8 @@
+
+apiVersion: project.ccs.vmware.com/v1alpha1
+kind: Project
+metadata:
+  name: ${PROJECT}
+spec:
+  description: This is a demo project
+  sharedResources: true

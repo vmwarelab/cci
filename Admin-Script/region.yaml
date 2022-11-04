@@ -1,0 +1,6 @@
+apiVersion: topology.ccs.vmware.com/v1alpha1
+kind: Region
+metadata:
+  name: ${REGION}
+spec:
+  description: The ${REGION} region

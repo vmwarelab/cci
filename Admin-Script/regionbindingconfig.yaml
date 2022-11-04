@@ -1,0 +1,12 @@
+apiVersion: topology.ccs.vmware.com/v1alpha1
+kind: RegionBindingConfig
+metadata:
+  name: ${REGION}
+  namespace: ${PROJECT}
+spec:
+  supervisorSelector:
+    matchExpressions:
+      - key: environment
+        operator: In
+        values:
+          - ${ENVIRONMENT}
