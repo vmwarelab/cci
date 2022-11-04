@@ -1,0 +1,27 @@
+apiVersion: infrastructure.ccs.vmware.com/v1alpha1
+kind: SupervisorNamespaceClassConfig
+metadata:
+  name: Your_Supervisor_Namespace_Class_Name
+spec:
+  storageClasses:
+    - name: Your_Storage_Policy
+  vmClasses:
+    - name: "*"
+  contentSources:
+    - name: "*"
+      type: ContentLibrary
+  # Below limis are an EXAMPLE! Setting them may cause unexpected behavior in your namespace
+  # Either set reasonable limits, or remove the below section to get unlimited resources
+  #limits:
+  # - name: cpu_limit
+  #    limit: "1000" # This value is in Mhz
+  # - name: cpu_limit_default
+  #   limit: "800" # This value is in Mhz
+  # - name: pod_count
+  #   limit: "((parameters.pods))"
+  supervisorSelector:
+    matchExpressions:
+      - key: Your_Key_Name
+        operator: In
+        values:
+          - Your_key_Value

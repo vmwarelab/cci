@@ -1,0 +1,10 @@
+apiVersion: infrastructure.ccs.vmware.com/v1alpha1
+kind: SupervisorNamespaceClassBinding
+metadata:
+  name: Your_Supervisor_Namespace_Class_Name
+  namespace: Your_Project_Name
+spec:
+  overrideParameters:
+    - name: pods
+      type: Integer
+      const: 50

@@ -1,0 +1,73 @@
+apiVersion: vmoperator.vmware.com/v1alpha1
+kind: VirtualMachine
+metadata:
+  name: redis2
+  namespace: Your_Namespace
+  labels:
+    vm-selector: redis2
+spec:
+  className: best-effort-small
+  imageName: Your_Image_Name 
+  storageClass: Your_Storage_Policy
+  powerState: poweredOn
+  vmMetadata:
+    secretName: redis2-cloudinit-secret
+    transport: CloudInit
+---
+apiVersion: vmoperator.vmware.com/v1alpha1
+kind: VirtualMachineService
+metadata:
+  name: redis2-vm-service
+  namespace: Your_Namespace
+spec:
+  selector:
+    vm-selector: redis2
+  type: LoadBalancer
+  ports:
+    - name: redis
+      protocol: TCP
+      port: 6379
+      targetPort: 6379
+    - name: ssh
+      protocol: TCP
+      port: 22
+      targetPort: 22
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: redis2-cloudinit-secret
+  namespace: Your_Namespace
+  labels:
+    vm-selector: redis2
+stringData:
+  user-data: |
+    #cloud-config
+    repo_update: true
+    repo_upgade: all
+    
+    groups:
+      - docker
+    users:
+      - default
+      - name: redis
+        expiredate: '2032-01-01'
+        lock_passwd: false
+        passwd: "$6$XlPaQkGtoUOWqfKz$Jb3uBcfTpIIskc3oFGZYwyaqRCDp..Q7EGvAkEAlb5hv.la5MCaBd1OxjOJJstEE78LoXsR2QByXsfCmXFNZ11"
+        ssh-authorized-keys:
+          - ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAQEAhgSBDxvxxTWL+59Q3BqkS2uQs+3uQ78n0WVnUwg/gwmnT129p1shIaA2u21j2f57+UKe870M8qR2+WQnFV8bWhqWV377I+gVklQqJjCq3sjclCnJI7e7EM3/fEEgABhIQ+RYjE03JGvAZp4vFIuZWXE7HCUqGyM3n097WAjE5FAl8XlVT3eNA1yiizDz7cDYNqkRwXZLvBkPq3xj5NPNpvPOVxhi1+oHHQN2AIYh15VmRhwgUy0N4XGaZO0ebdtUH5Gn4QUwwGKvo79WSf4N4mwHG7es4keOU5zH4PmbuqA6U7ZC/oiegicqELQD/rVZkjqR/ZINr9CR7jZcJcV4Uw== redis
+        sudo: ALL=(ALL) NOPASSWD:ALL
+        groups: sudo, docker
+        shell: /bin/bash
+    network:
+      version: 2
+      ethernets:
+        ens192:
+          dhcp4: true
+    packages:
+       - redis-server
+       - net-tools       
+    runcmd:
+      - sed -i "s/supervised no/supervised systemd/g" /etc/redis/redis.conf
+      - sed -i "s/bind 127.0.0.1 ::1/bind 0.0.0.0 ::/g" /etc/redis/redis.conf
+      - systemctl restart redis.service

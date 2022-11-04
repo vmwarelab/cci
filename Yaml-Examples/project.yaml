@@ -1,0 +1,7 @@
+apiVersion: project.ccs.vmware.com/v1alpha1
+kind: Project
+metadata:
+  name: Your_Project_Name
+spec:
+  description: Your_Description
+  sharedResources: true

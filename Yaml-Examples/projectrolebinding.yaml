@@ -1,0 +1,12 @@
+apiVersion: authorization.ccs.vmware.com/v1alpha1
+kind: ProjectRoleBinding
+metadata:
+  name: ccs:user:vmware.com:Your_Alias
+  namespace: Your_Project
+roleRef:
+  apiGroup: authorization.ccs.vmware.com
+  kind: ProjectRole
+  name: admin
+subjects:
+- kind: User
+  name: Your_Alias@Your_Domain

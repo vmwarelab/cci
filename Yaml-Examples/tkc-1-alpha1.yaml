@@ -1,0 +1,38 @@
+apiVersion: run.tanzu.vmware.com/v1alpha1
+kind: TanzuKubernetesCluster
+metadata:
+  name: tkc-1
+
+spec:
+  distribution:
+    version: v1.21
+  topology:
+    controlPlane:
+      class: best-effort-small
+      count: 1
+      storageClass: explore-kubernetes-storage-policy 
+    workers:
+      class: best-effort-small
+      count: 1
+      storageClass: explore-kubernetes-storage-policy
+  settings:
+    storage:
+      classes: ["explore-kubernetes-storage-policy"]              #Named PVC storage classes
+      defaultClass: explore-kubernetes-storage-policy                  #Default PVC storage class
+    network:
+      cni:
+        name: antrea
+      pods:
+        cidrBlocks:
+          - 192.168.156.0/20
+      services:
+        cidrBlocks:
+          - 10.96.0.0/12
+  
+
+
+
+
+
+
+

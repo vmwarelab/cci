@@ -1,0 +1,10 @@
+apiVersion: infrastructure.ccs.vmware.com/v1alpha1
+kind: SupervisorNamespace
+metadata:
+  name: Your_Supervisor_Namespaces
+  namespace: Your_Project_Name
+spec:
+  description: Your_Description
+  regionName: Your_Region_Name
+  className: Your_Supervisor_Namespace_Class_Name
+  

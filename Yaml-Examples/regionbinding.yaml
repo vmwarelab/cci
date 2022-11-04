@@ -1,0 +1,5 @@
+apiVersion: topology.ccs.vmware.com/v1alpha1
+kind: RegionBinding
+metadata:
+  name: Your_Region_Name
+  namespace: Your_Project_Name
