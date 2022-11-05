@@ -17,7 +17,7 @@ Populate the script with your Admin API Token and AA SaaS API Server when connec
 ## connect-cci-user.sh  
 Populate the script with your User API Token and AA SaaS API Server when connecting to CCI using the Kubectl CCI plugin
 
-
+```
 API Servers List
 ================
 United States    api.mgmt.cloud.vmware.com
@@ -28,7 +28,7 @@ Germany          de.api.mgmt.cloud.vmware.com
 Australia        au.api.mgmt.cloud.vmware.com
 Canada           ca.api.mgmt.cloud.vmware.com
 Brazil           br.api.mgmt.cloud.vmware.com
-
+```
 ## connect-sc.sh
 Populate the script with your Supervisor IP , username and password to connect to the supervisor cluster using the kubectl vsphere plug-ing 
 
