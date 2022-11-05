@@ -1,7 +1,7 @@
 
 ## Cloud Consumption Interface powered by Aria Automation
 
-##Details on the Yaml and Script files 
+## Details on the Yaml and Script files 
 
 
 ## AllowAllPods.sh
@@ -13,6 +13,7 @@ Enable kubectl bash completion and fast context switching
 
 ## connect-cci-admin.sh  
 Populate the script with your Admin API Token and AA SaaS API Server when connecting to CCI using the plugin
+
 ```
 United States    api.mgmt.cloud.vmware.com
 United Kingdom   uk.api.mgmt.cloud.vmware.com
@@ -25,6 +26,7 @@ Brazil           br.api.mgmt.cloud.vmware.com
 
 ## connect-cci-user.sh  
 Populate the script with your User API Token and AA SaaS API Server when connecting to CCI using the Kubectl CCI plugin
+
 ```
 United States    api.mgmt.cloud.vmware.com
 United Kingdom   uk.api.mgmt.cloud.vmware.com
