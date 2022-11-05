@@ -14,20 +14,11 @@ Enable kubectl bash completion and fast context switching
 ## connect-cci-admin.sh  
 Populate the script with your Admin API Token and AA SaaS API Server when connecting to CCI using the plugin
 
-```
-United States    api.mgmt.cloud.vmware.com
-United Kingdom   uk.api.mgmt.cloud.vmware.com
-Japan            jp.api.mgmt.cloud.vmware.com
-Singapore        sg.api.mgmt.cloud.vmware.com
-Germany          de.api.mgmt.cloud.vmware.com
-Australia        au.api.mgmt.cloud.vmware.com
-Canada           ca.api.mgmt.cloud.vmware.com
-Brazil           br.api.mgmt.cloud.vmware.com
-
 ## connect-cci-user.sh  
 Populate the script with your User API Token and AA SaaS API Server when connecting to CCI using the Kubectl CCI plugin
 
-```
+
+``` API Servers
 United States    api.mgmt.cloud.vmware.com
 United Kingdom   uk.api.mgmt.cloud.vmware.com
 Japan            jp.api.mgmt.cloud.vmware.com
