@@ -1,7 +1,7 @@
 
 ## Cloud Consumption Interface powered by Aria Automation
 
-## Details on the Yaml and Script files 
+## Details on the Script files 
 
 
 ## AllowAllPods.sh
