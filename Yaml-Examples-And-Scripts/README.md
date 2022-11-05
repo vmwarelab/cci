@@ -1,9 +1,7 @@
-# cci
 
-Cloud Consumption Interface powered by Aria Automation
+## Cloud Consumption Interface powered by Aria Automation
 
-Details on the Script files 
-
+##Details on the Yaml and Script files 
 
 
 ## AllowAllPods.sh
