@@ -18,7 +18,8 @@ Populate the script with your Admin API Token and AA SaaS API Server when connec
 Populate the script with your User API Token and AA SaaS API Server when connecting to CCI using the Kubectl CCI plugin
 
 
-``` API Servers
+API Servers List
+================
 United States    api.mgmt.cloud.vmware.com
 United Kingdom   uk.api.mgmt.cloud.vmware.com
 Japan            jp.api.mgmt.cloud.vmware.com
