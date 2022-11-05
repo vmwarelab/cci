@@ -36,4 +36,5 @@ Populate the script with your Supervisor IP , username and password to connect t
 Populate the script with your Supervisor IP , Supervisor Namespace, TKG Cluster name, username and password to connect to the TKG cluster using the kubectl vsphere plug-ing 
 
 
-Note: The Yaml Files should be self explanatory 
+Note: - The Yaml Files should be self explanatory 
+      - Make sure the scripts are executable 
