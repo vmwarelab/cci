@@ -39,6 +39,7 @@ echo "Be sure to Patch Supervisor - Region / Labels per documentation"
 echo "---------------------------------------------------------------"
 echo "STEP 1 : Get list of supervisors :  kubectl -n ccs-config get supervisors"
 echo "STEP 2 : Edit the superisor to add Region and Labels :  kubectl -n ccs-config edit supervisor <Supervisor Name>"
+echo "---------------------------------------------------------------"
 echo "Use this Label: "${ENVIRONMEN}
 echo "Use this region: "${REGION}
 
