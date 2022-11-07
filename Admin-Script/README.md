@@ -46,13 +46,13 @@ Find your SV cluster:
 kubectl -n ccs-config get supervisors
 ```
 
-Then update it per the documentation:
+Then update it to add the label and region:
 
 ```
 kubectl -n ccs-config edit supervisor ${YOUR_SV_CLUSTER}
 ```
 
-As of 2022-07-21, add the following labels:
+Add the labels:
 ```
   labels: 
     environment: ${matching the ${ENVIRONMENT} above}
