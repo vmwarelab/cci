@@ -24,7 +24,7 @@ This should be your LDAP user id.
 
 `STORAGE_CLASS`: The name of the storage class that will be used. It needs to be available in the SV.
 
-'ENVIRONMENT' : The  Name of the Environment Selector
+`ENVIRONMENT` : The  Name of the Environment Selector
 
 Login
 ```
@@ -52,13 +52,13 @@ Then update it to add the label and region:
 kubectl -n ccs-config edit supervisor ${YOUR_SV_CLUSTER}
 ```
 
-Add the labels:
+Add a label representing the supervisor in a key value pair formatn ( for Example environment: prod ):
 ```
   labels: 
     environment: ${matching the ${ENVIRONMENT} above}
 ```
 
-and add this to the spec, matching the ${REGION} above
+Add this to the spec, matching the ${REGION} created above
 ```
   regionNames:
     - ${matching the ${REGION} above}
