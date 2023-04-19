@@ -1,5 +1,7 @@
 ## Instruction to deploy the MOAD Opencart Application
 
+Prerequisites 
+
 ## 1. Login into CCI as an Admin or User using the K8s CCI plugin
 ```
 export CCI_API_TOKEN=Your_Admin/User_Token
@@ -31,7 +33,7 @@ spec:
   kubectl ccs set-context --project moad --supervisor-namespace open-cart
 ```
 Note: You only have to create your context if you login with --skip-set-context option.
-      Without it the conext will be auto created when you login into cci.
+      Without it the context will be auto created when you login into cci.
 
 ## 5. Switch Context to your Supervisor Name ccs:moad:open-cart
 ```
@@ -75,7 +77,7 @@ kubectl vsphere login --server=https://$SC_IP --tanzu-kubernetes-cluster-name Yo
 ```
 kubectl config use-context ccs:moad:open-cart
 ```
-Note: You will be automatically switched to your TKG Cluster Contxt upon login.
+Note: You will be automatically switched to your TKG Cluster Context upon login.
 
 ## 10. Create an allow all Pod Security Policy
 This shouldn't be done in production, but for a quick start, this will bind all authenticated users to run any type of container
@@ -97,7 +99,7 @@ helm install --namespace default my-open-cart bitnami/opencart --set opencartUse
 ```
 Note: The External Database IP is from step 4, the IP address for the MySQL Service provisioned via the VM Service.
 
-Follow the Helm chart insturctions ( Dont Copy anything out of this output )
+Follow the Helm chart instructions ( Don’t Copy anything out of this output )
 
 ```
 1. Get the OpenCart URL by running:
@@ -134,13 +136,12 @@ export DATABASE_ROOT_PASSWORD=$(kubectl get secret --namespace default my-open-c
 export APP_DATABASE_PASSWORD=$(kubectl get secret --namespace default my-open-cart-opencart-externaldb -o jsonpath="{.data.mariadb-password}" | base64 -d)
 ```
 
-### E. Complete your OpenCart deployment by running the Helm upgarde
+### E. Complete your OpenCart deployment by running the Helm upgrade
 
 ```
 helm upgrade --namespace default my-open-cart bitnami/opencart --set opencartPassword=$APP_PASSWORD,opencartHost=$APP_HOST,service.type=LoadBalancer,mariadb.enabled="false",externalDatabase.host="10.176.193.6",externalDatabase.user="ocuser",externalDatabase.password="VMware1!",externalDatabase.database="opencart"
 ```
-Note: Will need to do a few updates before you execute the helm upgrade command. you need to  update your repo to bitnami/opencart instead of my-repo/opencart and add double quoats to all the values except the variables. 
-
+Note: Will need to do a few updates before you execute the helm upgrade command. you need to update your repo to bitnami/opencart instead of my-repo/opencart and add double quotes to all the values except the variables. 
 
 Once Excuted you will have the generated OpenCart URL
 
@@ -169,7 +170,7 @@ APP VERSION: 4.0.1-1
   echo Admin Password: $(kubectl get secret --namespace default my-open-cart-opencart -o jsonpath="{.data.opencart-password}" | base64 -d)
 ```
 
-### F. Query your Opencart Obejcts 
+### F. Query your Opencart Objects 
 
 ```
 # kubectl get all
@@ -206,4 +207,5 @@ sh.helm.release.v1.my-open-cart.v2   helm.sh/release.v1                    1    
 ```
 
 ### G. Hit the new Store URL: http://10.176.193.17/
+
 
