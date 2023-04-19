@@ -26,19 +26,19 @@ spec:
   regionName: Your_Region_Name
   className: Your_Supervisor_Namespace_Class_Name
   ```
-## 3. Create your context 
+## 4. Create your context 
 ```
   kubectl ccs set-context --project moad --supervisor-namespace open-cart
 ```
 Note: You only have to create your context if you login with --skip-set-context option.
       Without it the conext will be auto created when you login into cci.
 
-## 3. Switch Context to your Supervisor Name ccs:moad:open-cart
+## 5. Switch Context to your Supervisor Name ccs:moad:open-cart
 ```
 kubectl config use-context ccs:moad:open-cart
 ```
 
-## 4. Deploy your MySQL Database using VM Service
+## 6. Deploy your MySQL Database using VM Service
 ```
 kubectl create -f oc-mysql-vm.yaml
 ```
@@ -58,12 +58,12 @@ virtualmachineservice.vmoperator.vmware.com/oc-mysql-vm-service   LoadBalancer  
 NAME                          TYPE           CLUSTER-IP    EXTERNAL-IP    PORT(S)                       AGE   SELECTOR
 service/oc-mysql-vm-service   LoadBalancer   10.96.0.152   10.176.193.6   3306:30292/TCP,22:32217/TCP   83s   <none>
 ```
-## 5. Deploy a TKG Cluster within the open-cart Supervisor Namespace
+## 7. Deploy a TKG Cluster within the open-cart Supervisor Namespace
 ```
 kubectl create -f oc-tkg-cluster.yaml
 ```
 
-## 6. Login into your TKG Cluster using the K8s vSphere Plugin 
+## 8. Login into your TKG Cluster using the K8s vSphere Plugin 
 ```
 export SC_IP=Your_Supervisor_IP
 export NAMESPACE=Your_Namespace
@@ -71,19 +71,19 @@ export KUBECTL_VSPHERE_PASSWORD=Your_vSphere_Password
 kubectl vsphere login --server=https://$SC_IP --tanzu-kubernetes-cluster-name Your_TKG_Cluster_Name --tanzu-kubernetes-cluster-namespace $NAMESPACE --vsphere-username Your_vSphere_Username --insecure-skip-tls-verify
 ```
 
-## 7. Switch Context to your TKG Cluster 
+## 9. Switch Context to your TKG Cluster 
 ```
 kubectl config use-context ccs:moad:open-cart
 ```
 Note: You will be automatically switched to your TKG Cluster Contxt upon login.
 
-## 8. Create an allow all Pod Security Policy
+## 10. Create an allow all Pod Security Policy
 This shouldn't be done in production, but for a quick start, this will bind all authenticated users to run any type of container
 ```
 kubectl create clusterrolebinding default-tkg-admin-privileged-binding --clusterrole=psp:vmware-system-privileged --group=system:authenticated
 ```
 
-## 9. Deploy the Opencart Frontend using Helm packaged by Bitnami
+## 11. Deploy the Opencart Frontend using Helm packaged by Bitnami
 https://bitnami.com/stack/opencart/helm
 
 # A. Add the bitnami repo:
