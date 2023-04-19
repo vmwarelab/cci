@@ -7,12 +7,13 @@ OpenCart Application Architecture
 ## Prerequisites 
 
 1. vSphere with Tanzu vCenter 7 U3i or higher with an enabled Workload management Cluster ( Supervisor)
-2. vSphere+ Subscription where the Developer Experience is Enabled which setup Cloud Consumption Interface
-3. Access to Aria Atomation SaaS Org.
+2. vSphere+ Subscription where the Developer Experience is Enabled which in turn, sets up all the Cloud Consumption Interface building blocks.
+3. Access to Aria Automation SaaS .
 4. Generated CCI API Token with the minimum required CSP Service roles
-5. Downloaded and configure both the Kubectl vSphere plug-in and the Kubectl CCI Plug-in on Linux, Mac or Windows.
+5. Downloaded and configured both the Kubectl vSphere plug-in and the Kubectl CCI Plug-in on Linux, Mac or Windows where your planning to execute
+   the command from.
 
-Let's get started 
+##Let's get started 
 
 ## 1. Login into CCI as an Admin or User using the K8s CCI plugin
 ```
