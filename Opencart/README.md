@@ -90,7 +90,7 @@ https://bitnami.com/stack/opencart/helm
 ```
 helm repo add bitnami https://charts.bitnami.com/bitnami
 ```
-# B. Install the Opencart Helm chart with Custom options to disable the embedded Maria Database and specify our own parameters
+### B. Install the Opencart Helm chart with Custom options to disable the embedded Maria Database and specify our own parameters
 for the Opencart username and password, the MySQL Database, the Database username and password and finally the database name. 
 ```
 helm install --namespace default my-open-cart bitnami/opencart --set opencartUsername="demouser",opencartPassword="VMware1!",externalDatabase.host="10.176.193.6",externalDatabase.user="ocuser",externalDatabase.password="VMware1!",externalDatabase.database="opencart",mariadb.enabled="false"
@@ -118,7 +118,7 @@ Follow the Helm chart insturctions ( Dont Copy anything out of this output )
     --set opencartPassword=$APP_PASSWORD,opencartHost=$APP_HOST,service.type=LoadBalancer,mariadb.enabled=false,externalDatabase.host=10.176.193.6,externalDatabase.user=ocuser,externalDatabase.password=VMware1!,externalDatabase.database=opencart
  ```   
 
-# C. Document the LoadBalancer IP  once its generated - > 10.176.193.17 by running 
+### C. Document the LoadBalancer IP  once its generated - > 10.176.193.17 by running 
 
 ```
 kubectl get svc --namespace default  my-open-cart-opencart
@@ -128,7 +128,7 @@ my-open-cart-opencart   LoadBalancer   10.96.69.234   10.176.193.17   80:30049/T
 
 Execute the above 4 Export commands to set the upgrade command variables being used
 
-# D. Complete your OpenCart deployment by running the Helm upgarde
+### D. Complete your OpenCart deployment by running the Helm upgarde
 
 ```
 helm upgrade --namespace default my-open-cart bitnami/opencart --set opencartPassword=$APP_PASSWORD,opencartHost=$APP_HOST,service.type=LoadBalancer,mariadb.enabled="false",externalDatabase.host="10.176.193.6",externalDatabase.user="ocuser",externalDatabase.password="VMware1!",externalDatabase.database="opencart"
@@ -163,7 +163,7 @@ APP VERSION: 4.0.1-1
   echo Admin Password: $(kubectl get secret --namespace default my-open-cart-opencart -o jsonpath="{.data.opencart-password}" | base64 -d)
 ```
 
-# E. Query your Opencart Obejcts 
+### E. Query your Opencart Obejcts 
 
 ```
 # kubectl get all
@@ -199,5 +199,5 @@ sh.helm.release.v1.my-open-cart.v2   helm.sh/release.v1                    1    
 
 ```
 
-# F. Hit the new Store URL: http://10.176.193.17/
+### F. Hit the new Store URL: http://10.176.193.17/
 
