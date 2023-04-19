@@ -45,7 +45,7 @@ Note: the CCS context is the CCI managment context where you can create and mana
 ```
 kubectl create -f oc-svns.yaml
 ```
-Template Example  
+Yaml Template Example  
 ```
 apiVersion: infrastructure.ccs.vmware.com/v1alpha1
 kind: SupervisorNamespace
@@ -101,6 +101,42 @@ service/oc-mysql-vm-service   LoadBalancer   10.96.0.152   10.176.193.6   3306:3
 ```
 Note: The oc-tkg-cluster.yaml is included in the git repo ( Modify it according to your setup)
 
+Yaml Template Example
+```
+apiVersion: run.tanzu.vmware.com/v1alpha2
+kind: TanzuKubernetesCluster
+metadata:
+  name: Your_Cluster_Name
+  labels:
+    tkgs-cluster-selector: Your_Cluster_Name
+spec:
+  settings:
+    network:
+      cni:
+        name: antrea
+      pods:
+        cidrBlocks:
+          - 192.168.156.0/20
+      services:
+        cidrBlocks:
+          - 10.96.0.0/12
+  topology:
+    controlPlane:
+      replicas: 1
+      vmClass: Your_VM_Class
+      storageClass: Your_storage_policy
+      tkr:
+        reference:
+          name: Your_Tanzu_Kubernetes_Release
+    nodePools:
+      - name: Your_Cluster_Name_Nodepool
+        replicas: 1
+        vmClass: Your_VM_Class
+        storageClass: Your_storage_policy
+        tkr:
+          reference:
+            name: Your_Tanzu_Kubernetes_Release
+```
 ## 8. Login into your TKG Cluster using the K8s vSphere Plugin 
 ```
 export SC_IP=Your_Supervisor_IP
