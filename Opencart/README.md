@@ -1,4 +1,4 @@
-## Instructions to deploy the MOAD Opencart Application using Cloud Consumption Interface CCI
+## Instructions to deploy the Opencart Application using Cloud Consumption Interface CCI
 
 ## What is CCI ?
 Enable a cloud experience that allows developers and other users to independently provision infrastructure services, within limits governed by IT administrators.
