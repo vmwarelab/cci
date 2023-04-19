@@ -3,6 +3,7 @@
 
 Opencart Application Architecture 
 
+![open cart cci](https://user-images.githubusercontent.com/19843322/233148287-5f56d360-63fa-44bd-be05-e60fa7ce46be.png)
 
 
 Prerequisites 
