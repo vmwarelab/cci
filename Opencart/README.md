@@ -1,4 +1,4 @@
-## Instruction to deploy the MOAD Opencart Application
+## Instructions to deploy the MOAD Opencart Application using Cloud Consumption Interface CCI
 
 OpenCart Application Architecture
 
