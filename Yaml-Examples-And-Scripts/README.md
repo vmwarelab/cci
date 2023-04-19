@@ -31,7 +31,7 @@ Brazil           br.api.mgmt.cloud.vmware.com
 ## connect-sc.sh
 Populate the script with your Supervisor IP , username and password to connect to the supervisor cluster using the kubectl vsphere plug-ing 
 
-## connect-tks-1.sh
+## connect-tkg-cluster.sh
 Populate the script with your Supervisor IP , Supervisor Namespace, TKG Cluster name, username and password to connect to the TKG cluster using the kubectl vsphere plug-ing 
 
 
