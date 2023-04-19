@@ -31,6 +31,9 @@ export CCI_API_TOKEN=Your_Admin/User_Token
 export SERVER=Your_API_Server
 kubectl ccs login -t $CCI_API_TOKEN --server $SERVER --skip-set-context --insecure-skip-tls-verify
 ```
+Note: You can find a shell script for the above in cci/Yaml-Examples-And-Scripts/connect-cci-admin.sh or connect-cci-user.sh
+      The main difference between the two is that the --skip-set-context parameter is set in the admin script. 
+
 ## 2. Switch Context to CCS as your default Context
 ```
 kubectl config use-context ccs
@@ -62,21 +65,22 @@ Note: The oc-svns.yaml is included in the git repo.( Modify it according to your
   kubectl ccs set-context --project moad --supervisor-namespace open-cart
 ```
 Note: You only have to create your context if you login with --skip-set-context option.
-      Without it the context will be auto created when you login into cci.
+      Without it the context will be auto created based on your project membership when you login into cci.
 
 ## 5. Switch Context to your Supervisor Name ccs:moad:open-cart as your default context.
 ```
 kubectl config use-context ccs:moad:open-cart
 ```
 
-## 6. Deploy your MySQL Database using VM Service and Document the MySQL Service assigned External IP -> 10.176.193.6 
+## 6. Deploy your MySQL Database using VM Service 
 ( Can also be Done in the Aria Automation Service Broker UI)
 ```
 kubectl create -f oc-mysql-vm.yaml
 ```
 Note: This will create the MySQL VM and the MySQL VM Service
-Note: The oc-mysql-vm.yaml is included in the git repo ( Modify it according to your setup)
+      The oc-mysql-vm.yaml is included in the git repo ( Modify it according to your setup)
 
+Document the MySQL Service assigned External IP -> 10.176.193.6 by running :
 ```
 kubectl get vm,vmservice,service -o wide
 
@@ -89,6 +93,7 @@ virtualmachineservice.vmoperator.vmware.com/oc-mysql-vm-service   LoadBalancer  
 NAME                          TYPE           CLUSTER-IP    EXTERNAL-IP    PORT(S)                       AGE   SELECTOR
 service/oc-mysql-vm-service   LoadBalancer   10.96.0.152   10.176.193.6   3306:30292/TCP,22:32217/TCP   83s   <none>
 ```
+
 ## 7. Deploy a TKG Cluster within the open-cart Supervisor Namespace
 ( Can also be Done in the Aria Automation Service Broker UI)
 ```
@@ -104,11 +109,11 @@ export KUBECTL_VSPHERE_PASSWORD=Your_vSphere_Password
 kubectl vsphere login --server=https://$SC_IP --tanzu-kubernetes-cluster-name Your_TKG_Cluster_Name --tanzu-kubernetes-cluster-namespace $NAMESPACE --vsphere-username Your_vSphere_Username --insecure-skip-tls-verify
 ```
 
-## 9. Switch Context to your TKG Cluster 
+## 9. Switch Context to your TKG Cluster as your default context.
 ```
 kubectl config use-context ccs:moad:open-cart
 ```
-Note: You will be automatically switched to your TKG Cluster Context upon login.
+Note: You will be automatically switched to your TKG Cluster Context upon login but you can always return back to your TKG Context 
 
 ## 10. Create an allow all Pod Security Policy
 This shouldn't be done in production, but for a quick start, this will bind all authenticated users to run any type of container
@@ -123,6 +128,7 @@ https://bitnami.com/stack/opencart/helm
 ```
 helm repo add bitnami https://charts.bitnami.com/bitnami
 ```
+
 ### B. Install the Opencart Helm chart with Custom options to disable the embedded Maria Database and specify our own parameters
 for the Opencart username and password, the MySQL External Database, the Configured MySQL Database username and password and finally the database name. 
 ```
