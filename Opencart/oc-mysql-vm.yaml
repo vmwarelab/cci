@@ -2,7 +2,7 @@ apiVersion: vmoperator.vmware.com/v1alpha1
 kind: VirtualMachine
 metadata:
   name: oc-mysql
-  namespace: elastic-sky
+  namespace: open-cart
   labels:
     vm-selector: oc-mysql
 spec:
@@ -21,7 +21,7 @@ apiVersion: vmoperator.vmware.com/v1alpha1
 kind: VirtualMachineService
 metadata:
   name: oc-mysql-vm-service
-  namespace: elastic-sky
+  namespace: open-cart
 spec:
   selector:
     vm-selector: oc-mysql
@@ -40,7 +40,7 @@ apiVersion: v1
 kind: Secret
 metadata:
   name: oc-mysql-cloudinit-secret
-  namespace: elastic-sky
+  namespace: open-cart
   labels:
     vm-selector: oc-mysql
 stringData:

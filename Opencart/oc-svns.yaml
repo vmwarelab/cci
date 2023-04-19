@@ -1,0 +1,9 @@
+apiVersion: infrastructure.ccs.vmware.com/v1alpha1
+kind: SupervisorNamespace
+metadata:
+  name: open-cart
+  namespace: moad
+spec:
+  description: open-cart Supervisor Namespace
+  regionName: tmm-us-west
+  className: moad-small

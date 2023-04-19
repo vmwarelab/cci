@@ -1,0 +1,35 @@
+apiVersion: run.tanzu.vmware.com/v1alpha2
+kind: TanzuKubernetesCluster
+metadata:
+  name: oc-tkg-cluster
+  labels:
+    tkgs-cluster-selector: oc-tkg-cluster
+spec:
+  settings:
+    network:
+      cni:
+        name: antrea
+      pods:
+        cidrBlocks:
+          - 192.168.156.0/20
+      services:
+        cidrBlocks:
+          - 10.96.0.0/12
+  topology:
+    controlPlane:
+      replicas: 1
+      vmClass: best-effort-small
+      storageClass: tmm-kubernetes-storage-policy
+      defaultClass: tmm-kubernetes-storage-policy                  #Default PVC storage class
+      tkr:
+        reference:
+          name: v1.22.9---vmware.1-tkg.1.cc71bc8
+    nodePools:
+      - name: oc-tkg-cluster-nodepool-qzyl
+        replicas: 1
+        vmClass: best-effort-small
+        storageClass: tmm-kubernetes-storage-policy
+        tkr:
+          reference:
+            name: v1.22.9---vmware.1-tkg.1.cc71bc8
+
