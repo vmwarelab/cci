@@ -1,0 +1,101 @@
+apiVersion: vmoperator.vmware.com/v1alpha1
+kind: VirtualMachine
+metadata:
+  name: oc-mysql
+  namespace: elastic-sky
+  labels:
+    vm-selector: oc-mysql
+spec:
+  className: best-effort-small
+  imageName: ubuntu-18.04-server-cloudimg-amd64
+  storageClass: tmm-kubernetes-storage-policy
+  powerState: poweredOn
+  vmMetadata:
+    secretName: oc-mysql-cloudinit-secret
+    transport: CloudInit
+  networkInterfaces:
+    - networkType: nsx-t
+
+---
+apiVersion: vmoperator.vmware.com/v1alpha1
+kind: VirtualMachineService
+metadata:
+  name: oc-mysql-vm-service
+  namespace: elastic-sky
+spec:
+  selector:
+    vm-selector: oc-mysql
+  type: LoadBalancer
+  ports:
+    - name: mysql
+      protocol: TCP
+      port: 3306
+      targetPort: 3306
+    - name: ssh
+      protocol: TCP
+      port: 22
+      targetPort: 22
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: oc-mysql-cloudinit-secret
+  namespace: elastic-sky
+  labels:
+    vm-selector: oc-mysql
+stringData:
+  user-data: |
+    #cloud-config
+    repo_update: true
+    repo_upgrade: all
+    apt_source:
+      - source: deb http://archive.ubuntu.com/ubuntu main universe multiverse restricted
+
+    packages:
+      - mysql-server-5.7
+      - mysql-client
+      - unzip
+      - open-vm-tools
+
+    users:
+      - name: demouser
+        sudo: ['ALL=(ALL) NOPASSWD:ALL']
+        groups: sudo
+        shell: /bin/bash
+        ssh_authorized_keys:
+          - ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAQEAyCdobTWPsYBjDRTcUYO/6LF8wwkVAlU8Jm1KcB9FV+qbjmazGH0JV156LnwerqU59ehc9CSSCFRciSyq/04lHoD3erXqzloBEBxnynq7aWHVotB39ODRSTvjqraGh2+MfIeatTeAtRB7k6LLhcT9ADdAMQIR236W9iHxAX9rJVHwtdtDQNckdFSSdlgnH1FcZvlsAPelmBe/tNYVm091/vJZEqfKR80QKDc7Dmah7NJImWPuQXtsPAecOX/iEMVJJDeHnAI1zyJ7Mvqfph3Tp5qIcLgQ/UadSt18dHUyXaYuOXDzbVJX3/EBkV+FAymjklbTFVz965niGyaEw1aW+Q== rsa-key-20220728
+      - name: ocuser
+        sudo: ['ALL=(ALL) NOPASSWD:ALL']
+        groups: sudo
+        shell: /bin/bash
+
+    write_files:
+      - path: /etc/cron.hourly/oc_cleanup
+        owner: root
+        permissions: '0777'
+        content: "mysql -e 'use opencart; create table oc_session_copy like oc_session; drop table oc_session; rename table oc_session_copy to     oc_session;'"
+      - path: /etc/hosts
+        content: 127.0.0.1 oc-mysql
+        append: true
+
+    runcmd:
+      - export DEBIAN_FRONTEND=noninteractive
+      - USER=ocuser
+      - PASS=VMware1!
+      - hostnamectl set-hostname oc-mysql
+      - echo "mysql-server-5.7 mysql-server/root_password password root" | sudo debconf-set-selections
+      - echo "mysql-server-5.7 mysql-server/root_password_again password root" | sudo debconf-set-selections
+      - echo "[client]" >> /etc/mysql/mysql.conf.d/mysqld.cnf
+      - echo "user=root" >> /etc/mysql/mysql.conf.d/mysqld.cnf
+      - echo "password=root" >> /etc/mysql/mysql.conf.d/mysqld.cnf
+      - echo "user=ocuser" >> /etc/mysql/mysql.conf.d/mysqld.cnf
+      - echo "password=$PASS" >> /etc/mysql/mysql.conf.d/mysqld.cnf
+      - sed -i 's/#slow/slow/g' /etc/mysql/mysql.conf.d/mysqld.cnf
+      - sed -i 's/#long_query_time/long_query_time/g' /etc/mysql/mysql.conf.d/mysqld.cnf
+      - sed -i 's/bind-address/#bind-address/g' /etc/mysql/mysql.conf.d/mysqld.cnf
+      - systemctl restart mysql
+      - mysql -u root -e "GRANT ALL ON *.* TO '$USER'@'%' IDENTIFIED BY '$PASS'"
+      - mysql -u root -e 'CREATE DATABASE opencart'
+      - mysql -u root -e 'USE opencart'
+      - mysql -u root -e 'flush privileges'
+      - echo 'Cloud-init is done!' >> /tmp/finished.txt
