@@ -1,5 +1,8 @@
 ## Instruction to deploy the MOAD Opencart Application
 
+OpenCart Application Architecture
+
+![Alt text](open%20cart%20cci.png)
 
 Prerequisites 
 
