@@ -4,10 +4,10 @@
 Enable a cloud experience that allows developers and other users to independently provision infrastructure services, within limits governed by IT administrators.
 
 Check the following resources for more information on CCI:
-- CCI Website: https://www.vmware.com/products/vsphere/self-service-infrastructure.html
-- CCI Video : https://www.youtube.com/watch?v=BcP9XHc2Lkc
-- CCI Blog: https://blogs.vmware.com/management/2023/01/introducing-cci-cloud-consumption-interface-with-aria-automation-free-tier-and-vsphere-subscription.html
-- CCI Documentation: https://docs.vmware.com/en/VMware-Aria-Automation/SaaS/Using-Automation-Consumption/GUID-03D4F41F-D4A6-4350-91AE-F7A40FDC3C7D.html
+- CCI Website: https://bit.ly/41l4Qvh
+- CCI Video : https://bit.ly/3UTfiYC
+- CCI Blog: https://bit.ly/3UQE8bh
+- CCI Documentation: https://bit.ly/3UNKKXW
 
 ## OpenCart Application Architecture
 
