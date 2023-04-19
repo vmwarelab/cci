@@ -126,9 +126,15 @@ NAME                    TYPE           CLUSTER-IP     EXTERNAL-IP     PORT(S)   
 my-open-cart-opencart   LoadBalancer   10.96.69.234   10.176.193.17   80:30049/TCP,443:32309/TCP   2m3s
 ```
 
-Execute the above 4 Export commands to set the upgrade command variables being used
+### D. Execute the 4 Export commands to set the upgrade command variables being used in the next step
+```
+export APP_HOST=$(kubectl get svc --namespace default my-open-cart-opencart --template "{{ range (index .status.loadBalancer.ingress 0) }}{{ . }}{{ end }}")
+export APP_PASSWORD=$(kubectl get secret --namespace default my-open-cart-opencart -o jsonpath="{.data.opencart-password}" | base64 -d)
+export DATABASE_ROOT_PASSWORD=$(kubectl get secret --namespace default my-open-cart-opencart-externaldb -o jsonpath="{.data.mariadb-root-password}" | base64 -d)
+export APP_DATABASE_PASSWORD=$(kubectl get secret --namespace default my-open-cart-opencart-externaldb -o jsonpath="{.data.mariadb-password}" | base64 -d)
+```
 
-### D. Complete your OpenCart deployment by running the Helm upgarde
+### E. Complete your OpenCart deployment by running the Helm upgarde
 
 ```
 helm upgrade --namespace default my-open-cart bitnami/opencart --set opencartPassword=$APP_PASSWORD,opencartHost=$APP_HOST,service.type=LoadBalancer,mariadb.enabled="false",externalDatabase.host="10.176.193.6",externalDatabase.user="ocuser",externalDatabase.password="VMware1!",externalDatabase.database="opencart"
@@ -163,7 +169,7 @@ APP VERSION: 4.0.1-1
   echo Admin Password: $(kubectl get secret --namespace default my-open-cart-opencart -o jsonpath="{.data.opencart-password}" | base64 -d)
 ```
 
-### E. Query your Opencart Obejcts 
+### F. Query your Opencart Obejcts 
 
 ```
 # kubectl get all
@@ -199,5 +205,5 @@ sh.helm.release.v1.my-open-cart.v2   helm.sh/release.v1                    1    
 
 ```
 
-### F. Hit the new Store URL: http://10.176.193.17/
+### G. Hit the new Store URL: http://10.176.193.17/
 
