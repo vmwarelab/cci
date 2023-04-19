@@ -16,7 +16,8 @@ Check the following resources for more information on CCI:
 ## Prerequisites 
 
 1. vSphere with Tanzu vCenter 7 U3i or higher with an enabled Workload management Cluster ( Supervisor)
-2. vSphere+ Subscription where the Developer Experience is Enabled which in turn, sets up all the Cloud Consumption Interface building blocks.
+2. vSphere+ Subscription where the Developer Experience is Enabled which in turn, sets up all the Cloud Consumption Interface building blocks
+   Such as ( Projects, Project Role Bindings, Regions, Regionbindings, Supervisor Namesapce Class, Supervisor Namespace Class Config, Supervisor Namespace Class bindings )
 3. Access to Aria Automation SaaS .
 4. Generated CCI API Token with the minimum required CSP Service roles
 5. Download and configure both the Kubectl vSphere plug-in and the Kubectl CCI Plug-in on Linux, Mac or Windows where your planning to execute
@@ -30,10 +31,12 @@ export CCI_API_TOKEN=Your_Admin/User_Token
 export SERVER=Your_API_Server
 kubectl ccs login -t $CCI_API_TOKEN --server $SERVER --skip-set-context --insecure-skip-tls-verify
 ```
-## 2. Switch Context to CCS
+## 2. Switch Context to CCS as your default Context
 ```
 kubectl config use-context ccs
 ```
+Note: the CCS context is the CCI managment context where you can create and manage all the CCI building blocks.
+
 ## 3. Create a Supervisor Namespace  
 ( Can also be Done in the Aria Automation Service Broker UI)
 ```
@@ -52,7 +55,7 @@ spec:
   className: Your_Supervisor_Namespace_Class_Name
   ```
 
-Note: The oc-svns.yaml is included in the git repo.
+Note: The oc-svns.yaml is included in the git repo.( Modify it according to your setup)
 
 ## 4. Create your context 
 ```
@@ -61,7 +64,7 @@ Note: The oc-svns.yaml is included in the git repo.
 Note: You only have to create your context if you login with --skip-set-context option.
       Without it the context will be auto created when you login into cci.
 
-## 5. Switch Context to your Supervisor Name ccs:moad:open-cart
+## 5. Switch Context to your Supervisor Name ccs:moad:open-cart as your default context.
 ```
 kubectl config use-context ccs:moad:open-cart
 ```
