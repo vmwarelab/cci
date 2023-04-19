@@ -86,7 +86,7 @@ kubectl create clusterrolebinding default-tkg-admin-privileged-binding --cluster
 ## 11. Deploy the Opencart Frontend using Helm packaged by Bitnami
 https://bitnami.com/stack/opencart/helm
 
-# A. Add the bitnami repo:
+### A. Add the bitnami repo:
 ```
 helm repo add bitnami https://charts.bitnami.com/bitnami
 ```
