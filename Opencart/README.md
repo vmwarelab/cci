@@ -24,7 +24,8 @@ kubectl ccs login -t $CCI_API_TOKEN --server $SERVER --skip-set-context --insecu
 ```
 kubectl config use-context ccs
 ```
-## 3. Create a Supervisor Namespace
+## 3. Create a Supervisor Namespace  
+( Can also be Done in the Aria Automation Service Broker UI)
 ```
 kubectl create -f oc-svns.yaml
 ```
@@ -55,7 +56,8 @@ Note: You only have to create your context if you login with --skip-set-context 
 kubectl config use-context ccs:moad:open-cart
 ```
 
-## 6. Deploy your MySQL Database using VM Service and Document the MySQL Service assigned External IP -> 10.176.193.6
+## 6. Deploy your MySQL Database using VM Service and Document the MySQL Service assigned External IP -> 10.176.193.6 
+( Can also be Done in the Aria Automation Service Broker UI)
 ```
 kubectl create -f oc-mysql-vm.yaml
 ```
@@ -75,6 +77,7 @@ NAME                          TYPE           CLUSTER-IP    EXTERNAL-IP    PORT(S
 service/oc-mysql-vm-service   LoadBalancer   10.96.0.152   10.176.193.6   3306:30292/TCP,22:32217/TCP   83s   <none>
 ```
 ## 7. Deploy a TKG Cluster within the open-cart Supervisor Namespace
+( Can also be Done in the Aria Automation Service Broker UI)
 ```
 kubectl create -f oc-tkg-cluster.yaml
 ```
