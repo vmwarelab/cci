@@ -9,7 +9,7 @@ Check the following resources for more information on CCI:
 - CCI Blog: https://blogs.vmware.com/management/2023/01/introducing-cci-cloud-consumption-interface-with-aria-automation-free-tier-and-vsphere-subscription.html
 - 
 
-OpenCart Application Architecture
+## OpenCart Application Architecture
 
 ![Alt text](open%20cart%20cci.png)
 
