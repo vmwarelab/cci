@@ -195,7 +195,7 @@ NAME                             STATUS   VOLUME                                
 my-open-cart-opencart-opencart   Bound    pvc-5eedeed0-db29-40e6-b05a-4d32d4e1ddbd   8Gi        RWO            tmm-kubernetes-storage-policy   3m32s
 ```
 ```
-# k get secrets
+# kubectl get secrets
 NAME                                 TYPE                                  DATA   AGE
 default-token-j8r9z                  kubernetes.io/service-account-token   3      126m
 my-open-cart-opencart                Opaque                                1      5m4s
