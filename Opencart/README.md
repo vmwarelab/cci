@@ -1,5 +1,14 @@
 ## Instructions to deploy the MOAD Opencart Application using Cloud Consumption Interface CCI
 
+## What is CCI ?
+Enable a cloud experience that allows developers and other users to independently provision infrastructure services, within limits governed by IT administrators.
+
+Check the following resources for more information on CCI:
+- CCI Website: https://www.vmware.com/products/vsphere/self-service-infrastructure.html
+- CCI Video : https://www.youtube.com/watch?v=BcP9XHc2Lkc
+- CCI Blog: https://blogs.vmware.com/management/2023/01/introducing-cci-cloud-consumption-interface-with-aria-automation-free-tier-and-vsphere-subscription.html
+- 
+
 OpenCart Application Architecture
 
 ![Alt text](open%20cart%20cci.png)
@@ -10,10 +19,10 @@ OpenCart Application Architecture
 2. vSphere+ Subscription where the Developer Experience is Enabled which in turn, sets up all the Cloud Consumption Interface building blocks.
 3. Access to Aria Automation SaaS .
 4. Generated CCI API Token with the minimum required CSP Service roles
-5. Downloaded and configured both the Kubectl vSphere plug-in and the Kubectl CCI Plug-in on Linux, Mac or Windows where your planning to execute
+5. Download and configure both the Kubectl vSphere plug-in and the Kubectl CCI Plug-in on Linux, Mac or Windows where your planning to execute
    the command from.
 
-##Let's get started 
+## Let's get started 
 
 ## 1. Login into CCI as an Admin or User using the K8s CCI plugin
 ```
