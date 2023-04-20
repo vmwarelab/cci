@@ -18,7 +18,7 @@ For more details, check https://www.opencart.com/
 
 ![Alt text](open%20cart%20cci.png)
 
-We will be deploying a two tier Opencart Application where the backend Database is a MySQL Virtual Machine running on vsphere provisioned using the vSphere with Tanzu VM Service and the frontend using the bitnami 
+We will be deploying a two tier Opencart Application where the backend Database is a MySQL Virtual Machine running on vsphere provisioned using the vSphere with Tanzu VM Service and the frontend using the bitnami helm chart deployed on a TKG Wordkload Cluster all of which done via the Cloud Consumption Interface part of Aria Automation and vSphere+ subscription. 
 
 
 
@@ -28,9 +28,12 @@ We will be deploying a two tier Opencart Application where the backend Database 
 2. vSphere+ Subscription where the Developer Experience is Enabled which in turn, sets up all the Cloud Consumption Interface building blocks
    Such as ( Projects, Project Role Bindings, Regions, Regionbindings, Supervisor Namesapce Class, Supervisor Namespace Class Config, Supervisor Namespace Class bindings )
 3. Access to Aria Automation SaaS .
-4. Generated CCI API Token with the minimum required CSP Service roles
+4. Generated CCI API Token with the minimum required CSP Service roles. Please refer to the documentation here: https://bit.ly/3UNKKXW
 5. Download and configure both the Kubectl vSphere plug-in and the Kubectl CCI Plug-in on Linux, Mac or Windows where your planning to execute
    the command from.
+6. Kubernetes 1.19+
+7. Helm 3.2.0+
+
 
 ## Let's get started 
 
