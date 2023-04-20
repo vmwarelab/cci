@@ -75,14 +75,14 @@ stringData:
         permissions: '0777'
         content: "mysql -e 'use opencart; create table oc_session_copy like oc_session; drop table oc_session; rename table oc_session_copy to     oc_session;'"
       - path: /etc/hosts
-        content: 127.0.0.1 oc-mysql
+        content: 127.0.0.1 oc-mysql-vm
         append: true
 
     runcmd:
       - export DEBIAN_FRONTEND=noninteractive
       - USER=ocuser
       - PASS=VMware1!
-      - hostnamectl set-hostname oc-mysql
+      - hostnamectl set-hostname oc-mysql-vm
       - echo "mysql-server-5.7 mysql-server/root_password password root" | sudo debconf-set-selections
       - echo "mysql-server-5.7 mysql-server/root_password_again password root" | sudo debconf-set-selections
       - echo "[client]" >> /etc/mysql/mysql.conf.d/mysqld.cnf
