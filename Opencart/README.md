@@ -124,12 +124,12 @@ spec:
     storage:
       classes:
         - Your_storage_policy
-      defaultClass: Your_storage_policy
+      defaultClass: Your_storage_policy       #Default PVC storage class
   topology:
     controlPlane:
       replicas: 1
       vmClass: Your_VM_Class
-      storageClass: Your_storage_policy                 #Default PVC storage class
+      storageClass: Your_storage_policy                
       tkr:
         reference:
           name: Your_Tanzu_Kubernetes_Release

@@ -19,12 +19,12 @@ spec:
     storage:
       classes:
         - tmm-kubernetes-storage-policy
-      defaultClass: tmm-kubernetes-storage-policy
+      defaultClass: tmm-kubernetes-storage-policy   #Default PVC storage class
   topology:
     controlPlane:
       replicas: 1
       vmClass: best-effort-small
-      storageClass: tmm-kubernetes-storage-policy                 #Default PVC storage class
+      storageClass: tmm-kubernetes-storage-policy                
       tkr:
         reference:
           name: v1.23.8---vmware.3-tkg.1
