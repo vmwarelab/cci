@@ -1,17 +1,17 @@
 apiVersion: vmoperator.vmware.com/v1alpha1
 kind: VirtualMachine
 metadata:
-  name: oc-mysql
+  name: oc-mysql-vm
   namespace: open-cart
   labels:
-    vm-selector: oc-mysql
+    vm-selector: oc-mysql-vm
 spec:
   className: best-effort-small
   imageName: ubuntu-18.04-server-cloudimg-amd64
   storageClass: tmm-kubernetes-storage-policy
   powerState: poweredOn
   vmMetadata:
-    secretName: oc-mysql-cloudinit-secret
+    secretName: oc-mysql-vm-cloudinit-secret
     transport: CloudInit
   networkInterfaces:
     - networkType: nsx-t
@@ -24,7 +24,7 @@ metadata:
   namespace: open-cart
 spec:
   selector:
-    vm-selector: oc-mysql
+    vm-selector: oc-mysql-vm
   type: LoadBalancer
   ports:
     - name: mysql
@@ -39,10 +39,10 @@ spec:
 apiVersion: v1
 kind: Secret
 metadata:
-  name: oc-mysql-cloudinit-secret
+  name: oc-mysql-vm-cloudinit-secret
   namespace: open-cart
   labels:
-    vm-selector: oc-mysql
+    vm-selector: oc-mysql-vm
 stringData:
   user-data: |
     #cloud-config

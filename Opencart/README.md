@@ -125,6 +125,7 @@ spec:
       replicas: 1
       vmClass: Your_VM_Class
       storageClass: Your_storage_policy
+      defaultClass: Your_storage_policy                  #Default PVC storage class
       tkr:
         reference:
           name: Your_Tanzu_Kubernetes_Release
