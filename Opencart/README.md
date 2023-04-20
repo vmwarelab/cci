@@ -120,23 +120,28 @@ spec:
       services:
         cidrBlocks:
           - 10.96.0.0/12
+      service.Domain: cluster.local
+    storage:
+      classes:
+        - Your_storage_policy
+      defaultClass: Your_storage_policy
   topology:
     controlPlane:
       replicas: 1
       vmClass: Your_VM_Class
-      storageClass: Your_storage_policy
-      defaultClass: Your_storage_policy                  #Default PVC storage class
+      storageClass: Your_storage_policy                 #Default PVC storage class
       tkr:
         reference:
           name: Your_Tanzu_Kubernetes_Release
     nodePools:
-      - name: Your_Cluster_Name_Nodepool
+      - name: oc-tkg-cluster-nodepool-qzyl
         replicas: 1
         vmClass: Your_VM_Class
         storageClass: Your_storage_policy
         tkr:
           reference:
             name: Your_Tanzu_Kubernetes_Release
+
 ```
 ## 8. Login into your TKG Cluster using the K8s vSphere Plugin 
 ```

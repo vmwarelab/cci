@@ -15,21 +15,24 @@ spec:
       services:
         cidrBlocks:
           - 10.96.0.0/12
+      service.Domain: cluster.local
+    storage:
+      classes:
+        - tmm-kubernetes-storage-policy
+      defaultClass: tmm-kubernetes-storage-policy
   topology:
     controlPlane:
       replicas: 1
       vmClass: best-effort-small
-      storageClass: explore-kubernetes-storage-policy
-      defaultClass: explore-kubernetes-storage-policy                  #Default PVC storage class
+      storageClass: tmm-kubernetes-storage-policy                 #Default PVC storage class
       tkr:
         reference:
-          name: v1.22.9---vmware.1-tkg.1.cc71bc8
+          name: v1.23.8---vmware.3-tkg.1
     nodePools:
-      - name: tkgs-cluster-nodepool-qzyl
+      - name: tkc-1-nodepool-qzyl
         replicas: 1
         vmClass: best-effort-small
-        storageClass: explore-kubernetes-storage-policy
+        storageClass: tmm-kubernetes-storage-policy
         tkr:
           reference:
-            name: v1.22.9---vmware.1-tkg.1.cc71bc8
-
+            name: v1.23.8---vmware.3-tkg.1
