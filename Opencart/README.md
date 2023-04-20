@@ -14,6 +14,8 @@ Opencart is an easy to-use, powerful, Open Source online store management progra
 
 For more details, check https://www.opencart.com/
 
+![Alt text](open%20cart%20portal%20cci.png)
+
 ## OpenCart Application Architecture
 
 ![Alt text](open%20cart%20cci.png)
