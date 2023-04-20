@@ -1,4 +1,4 @@
-## Instructions to deploy the Opencart Application using Cloud Consumption Interface CCI
+### Instructions to deploy the Opencart Application using Cloud Consumption Interface CCI
 
 ## What is CCI ?
 Enable a cloud experience that allows developers and other users to independently provision infrastructure services, within limits governed by IT administrators.
@@ -8,6 +8,10 @@ Check the following resources for more information on CCI:
 - CCI Video : https://bit.ly/3UTfiYC
 - CCI Blog: https://bit.ly/3UQE8bh
 - CCI Documentation: https://bit.ly/3UNKKXW
+
+## What Is OpenCart?
+Opencart is an easy to-use, powerful, Open Source online store management program that can manage multiple online stores from a single back-end. Administrative area simply by filling in forms and clicking Save. There are many professionally-written extensions available to customize the store to your needs. 
+For more details, check https://www.opencart.com/
 
 ## OpenCart Application Architecture
 
@@ -164,7 +168,10 @@ kubectl create clusterrolebinding default-tkg-admin-privileged-binding --cluster
 ```
 
 ## 11. Deploy the Opencart Frontend using Helm packaged by Bitnami
+
 https://bitnami.com/stack/opencart/helm
+Bitnami makes it easy to get your favorite open source software up and running on any platform, including your laptop, Kubernetes and all the major clouds. In addition to popular community offerings, Bitnami, now part of VMware, provides IT organizations with an enterprise offering that is secure, compliant, continuously maintained and customizable to your organizational policies.
+
 
 ### A. Add the bitnami repo:
 ```
