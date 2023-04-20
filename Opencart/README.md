@@ -1,6 +1,7 @@
 ### Instructions to deploy the Opencart Application using Cloud Consumption Interface CCI
 
 ## What is CCI ?
+
 Enable a cloud experience that allows developers and other users to independently provision infrastructure services, within limits governed by IT administrators.
 
 Check the following resources for more information on CCI:
@@ -10,6 +11,7 @@ Check the following resources for more information on CCI:
 - CCI Documentation: https://bit.ly/3UNKKXW
 
 ## What Is OpenCart?
+
 Opencart is an easy to-use, powerful, Open Source online store management program that can manage multiple online stores from a single back-end. Administrative area simply by filling in forms and clicking Save. There are many professionally-written extensions available to customize the store to your needs.
 
 For more details, check https://www.opencart.com/
@@ -37,6 +39,7 @@ We will be deploying a two tier Opencart Application where the backend Database 
 ## Let's get started 
 
 ## 1. Login into CCI as an Admin or User using the K8s CCI plugin
+
 ```
 export CCI_API_TOKEN=Your_Admin/User_Token
 export SERVER=Your_API_Server
@@ -46,6 +49,7 @@ Note: You can find a shell script for the above in cci/Yaml-Examples-And-Scripts
       The main difference between the two is that the --skip-set-context parameter is set in the admin script. 
 
 ## 2. Switch Context to CCS as your default Context
+
 ```
 kubectl config use-context ccs
 ```
@@ -53,6 +57,7 @@ Note: the CCS context is the CCI managment context where you can create and mana
 
 ## 3. Create a Supervisor Namespace  
 ( Can also be Done in the Aria Automation Service Broker UI)
+
 ```
 kubectl create -f oc-svns.yaml
 ```
@@ -72,6 +77,7 @@ spec:
 Note: The oc-svns.yaml is included in the git repo.( Modify it according to your setup)
 
 ## 4. Create your context 
+
 ```
 kubectl ccs set-context --project moad --supervisor-namespace open-cart
 ```
@@ -79,12 +85,14 @@ Note: You only have to create your context if you login with --skip-set-context 
       Without it the context will be auto created based on your project membership when you login into cci.
 
 ## 5. Switch Context to your Supervisor Name ccs:moad:open-cart as your default context.
+
 ```
 kubectl config use-context ccs:moad:open-cart
 ```
 
 ## 6. Deploy your MySQL Database using VM Service 
 ( Can also be Done in the Aria Automation Service Broker UI)
+
 ```
 kubectl create -f oc-mysql-vm.yaml
 ```
@@ -107,6 +115,7 @@ service/oc-mysql-vm-service   LoadBalancer   10.96.0.152   10.176.193.6   3306:3
 
 ## 7. Deploy a TKG Cluster within the open-cart Supervisor Namespace
 ( Can also be Done in the Aria Automation Service Broker UI)
+
 ```
 kubectl create -f oc-tkg-cluster.yaml
 ```
@@ -155,6 +164,7 @@ spec:
 
 ```
 ## 8. Login into your TKG Cluster using the K8s vSphere Plugin 
+
 ```
 export SC_IP=Your_Supervisor_IP
 export NAMESPACE=Your_Namespace
@@ -163,6 +173,7 @@ kubectl vsphere login --server=https://$SC_IP --tanzu-kubernetes-cluster-name Yo
 ```
 
 ## 9. Switch Context to your TKG Cluster as your default context.
+
 ```
 kubectl config use-context ccs:moad:open-cart
 ```
@@ -170,6 +181,7 @@ Note: You will be automatically switched to your TKG Cluster Context upon login 
 
 ## 10. Create an allow all Pod Security Policy
 This shouldn't be done in production, but for a quick start, this will bind all authenticated users to run any type of container
+
 ```
 kubectl create clusterrolebinding default-tkg-admin-privileged-binding --clusterrole=psp:vmware-system-privileged --group=system:authenticated
 ```
@@ -183,11 +195,13 @@ Bitnami makes it easy to get your favorite open source software up and running o
 Read more about the installtion in the Github: https://github.com/bitnami/charts/tree/main/bitnami/opencart/#installing-the-chart
 
 ### A. Add the bitnami repo:
+
 ```
 # helm repo add bitnami https://charts.bitnami.com/bitnami
 ```
 
 ### B. Install the Opencart Helm chart with Custom options to disable the embedded Maria Database and specify our own parameters
+
 for the Opencart username and password, the MySQL External Database, the Configured MySQL Database username and password and finally the database name. 
 ```
 helm install --namespace default my-open-cart bitnami/opencart --set opencartUsername="demouser",opencartPassword="VMware1!",externalDatabase.host="10.176.193.6",externalDatabase.user="ocuser",externalDatabase.password="VMware1!",externalDatabase.database="opencart",mariadb.enabled="false"
@@ -226,6 +240,7 @@ my-open-cart-opencart   LoadBalancer   10.96.69.234   10.176.193.17   80:30049/T
 Note: Press Ctrl-C when the External-IP is populated to get out of watch parameter
 
 ### D. Execute the 4 provided Export commands to use with the upgrade command variables being used in the next step
+
 ```
 export APP_HOST=$(kubectl get svc --namespace default my-open-cart-opencart --template "{{ range (index .status.loadBalancer.ingress 0) }}{{ . }}{{ end }}")
 export APP_PASSWORD=$(kubectl get secret --namespace default my-open-cart-opencart -o jsonpath="{.data.opencart-password}" | base64 -d)
@@ -286,7 +301,6 @@ deployment.apps/my-open-cart-opencart   1/1     1            1           81s
 
 NAME                                               DESIRED   CURRENT   READY   AGE
 replicaset.apps/my-open-cart-opencart-7cd46d854c   1         1         1       81s
-
 ```
 ```
 kubectl get pvc
@@ -301,13 +315,12 @@ my-open-cart-opencart                Opaque                                1    
 my-open-cart-opencart-externaldb     Opaque                                1      5m4s
 sh.helm.release.v1.my-open-cart.v1   helm.sh/release.v1                    1      5m4s
 sh.helm.release.v1.my-open-cart.v2   helm.sh/release.v1                    1      4m18s
-
 ```
 
 ### G. Once you verify the pods and service are ready, Hit the generated Store URL: http://10.176.193.17/
 
-
 ### H. To delete your application
+
 ```
 helm delete --namespace default my-open-cart
 ```
