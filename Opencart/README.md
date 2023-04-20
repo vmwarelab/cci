@@ -312,4 +312,4 @@ sh.helm.release.v1.my-open-cart.v2   helm.sh/release.v1                    1    
 helm delete --namespace default my-open-cart
 ```
 
-## Happy Helming!
+## Happy Cloud Consumption!
