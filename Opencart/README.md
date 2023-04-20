@@ -120,7 +120,7 @@ spec:
       services:
         cidrBlocks:
           - 10.96.0.0/12
-      service.Domain: cluster.local
+      serviceDomain: cluster.local
     storage:
       classes:
         - Your_storage_policy
