@@ -16,11 +16,11 @@ Opencart is an easy to-use, powerful, Open Source online store management progra
 
 For more details, check https://www.opencart.com/
 
-![Alt text](open%20cart%20portal%20cci.png)
+![Alt text](images/open%20cart%20portal%20cci.png)
 
 ## OpenCart Application Architecture
 
-![Alt text](open%20cart%20cci.png)
+![Alt text](images/open%20cart%20cci.png)
 
 We will be deploying a two tier Opencart Application where the backend Database is a MySQL Virtual Machine running on vsphere provisioned using the vSphere with Tanzu VM Service and the frontend using helm chart packaged by bitnami, deployed on a TKG Wordkload Cluster all of which done via the Cloud Consumption Interface as part of Aria Automation and vSphere+ subscription. 
 
