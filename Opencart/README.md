@@ -29,8 +29,7 @@ We will be deploying a two tier Opencart Application where the backend Database 
    Such as ( Projects, Project Role Bindings, Regions, Regionbindings, Supervisor Namesapce Class, Supervisor Namespace Class Config, Supervisor Namespace Class bindings )
 3. Access to Aria Automation SaaS .
 4. Generated CCI API Token with the minimum required CSP Service roles. Please refer to the documentation here: https://bit.ly/3UNKKXW
-5. Download and configure both the Kubectl vSphere plug-in and the Kubectl CCI Plug-in on Linux, Mac or Windows where your planning to execute
-   the command from.
+5. Download and configure both the Kubectl vSphere plug-in and the Kubectl CCI Plug-in on Linux, Mac or Windows.
 6. Kubernetes 1.19+
 7. Helm 3.2.0+
 
