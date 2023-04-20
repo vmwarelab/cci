@@ -291,3 +291,9 @@ sh.helm.release.v1.my-open-cart.v2   helm.sh/release.v1                    1    
 ### G. Once you verify the pods and service are ready, Hit the generated Store URL: http://10.176.193.17/
 
 
+### H. To delete your application
+```
+helm delete --namespace default my-open-cart
+```
+
+## Happy Helming!
