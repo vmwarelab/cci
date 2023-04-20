@@ -10,12 +10,17 @@ Check the following resources for more information on CCI:
 - CCI Documentation: https://bit.ly/3UNKKXW
 
 ## What Is OpenCart?
-Opencart is an easy to-use, powerful, Open Source online store management program that can manage multiple online stores from a single back-end. Administrative area simply by filling in forms and clicking Save. There are many professionally-written extensions available to customize the store to your needs. 
+Opencart is an easy to-use, powerful, Open Source online store management program that can manage multiple online stores from a single back-end. Administrative area simply by filling in forms and clicking Save. There are many professionally-written extensions available to customize the store to your needs.
+
 For more details, check https://www.opencart.com/
 
 ## OpenCart Application Architecture
 
 ![Alt text](open%20cart%20cci.png)
+
+We will be deploying a two tier Opencart Application where the backend Database is a MySQL Virtual Machine running on vsphere provisioned using the vSphere with Tanzu VM Service and the frontend using the bitnami 
+
+
 
 ## Prerequisites 
 
@@ -172,6 +177,7 @@ kubectl create clusterrolebinding default-tkg-admin-privileged-binding --cluster
 https://bitnami.com/stack/opencart/helm
 Bitnami makes it easy to get your favorite open source software up and running on any platform, including your laptop, Kubernetes and all the major clouds. In addition to popular community offerings, Bitnami, now part of VMware, provides IT organizations with an enterprise offering that is secure, compliant, continuously maintained and customizable to your organizational policies.
 
+Read more about the installtion in the Github: https://github.com/bitnami/charts/tree/main/bitnami/opencart/#installing-the-chart
 
 ### A. Add the bitnami repo:
 ```
