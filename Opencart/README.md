@@ -18,7 +18,7 @@ For more details, check https://www.opencart.com/
 
 ![Alt text](open%20cart%20cci.png)
 
-We will be deploying a two tier Opencart Application where the backend Database is a MySQL Virtual Machine running on vsphere provisioned using the vSphere with Tanzu VM Service and the frontend using the bitnami helm chart deployed on a TKG Wordkload Cluster all of which done via the Cloud Consumption Interface part of Aria Automation and vSphere+ subscription. 
+We will be deploying a two tier Opencart Application where the backend Database is a MySQL Virtual Machine running on vsphere provisioned using the vSphere with Tanzu VM Service and the frontend using helm chart packaged by bitnami, deployed on a TKG Wordkload Cluster all of which done via the Cloud Consumption Interface as part of Aria Automation and vSphere+ subscription. 
 
 
 
