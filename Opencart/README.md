@@ -178,6 +178,7 @@ kubectl create clusterrolebinding default-tkg-admin-privileged-binding --cluster
 ## 11. Deploy the Opencart Frontend using Helm packaged by Bitnami
 
 https://bitnami.com/stack/opencart/helm
+
 Bitnami makes it easy to get your favorite open source software up and running on any platform, including your laptop, Kubernetes and all the major clouds. In addition to popular community offerings, Bitnami, now part of VMware, provides IT organizations with an enterprise offering that is secure, compliant, continuously maintained and customizable to your organizational policies.
 
 Read more about the installtion in the Github: https://github.com/bitnami/charts/tree/main/bitnami/opencart/#installing-the-chart
