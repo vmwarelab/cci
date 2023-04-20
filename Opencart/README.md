@@ -62,27 +62,27 @@ Note: The oc-svns.yaml is included in the git repo.( Modify it according to your
 
 ## 4. Create your context 
 ```
-# kubectl ccs set-context --project moad --supervisor-namespace open-cart
+kubectl ccs set-context --project moad --supervisor-namespace open-cart
 ```
 Note: You only have to create your context if you login with --skip-set-context option.
       Without it the context will be auto created based on your project membership when you login into cci.
 
 ## 5. Switch Context to your Supervisor Name ccs:moad:open-cart as your default context.
 ```
-# kubectl config use-context ccs:moad:open-cart
+kubectl config use-context ccs:moad:open-cart
 ```
 
 ## 6. Deploy your MySQL Database using VM Service 
 ( Can also be Done in the Aria Automation Service Broker UI)
 ```
-# kubectl create -f oc-mysql-vm.yaml
+kubectl create -f oc-mysql-vm.yaml
 ```
 Note: This will create the MySQL VM and the MySQL VM Service
       The oc-mysql-vm.yaml is included in the git repo ( Modify it according to your setup)
 
 Document the MySQL Service assigned External IP -> 10.176.193.6 by running :
 ```
-# kubectl get vm,vmservice,service -o wide
+kubectl get vm,vmservice,service -o wide
 
 NAME                                            POWERSTATE   CLASS               IMAGE                                PRIMARY-IP   AGE
 virtualmachine.vmoperator.vmware.com/oc-mysql   poweredOn    best-effort-small   ubuntu-18.04-server-cloudimg-amd64                83s
@@ -97,7 +97,7 @@ service/oc-mysql-vm-service   LoadBalancer   10.96.0.152   10.176.193.6   3306:3
 ## 7. Deploy a TKG Cluster within the open-cart Supervisor Namespace
 ( Can also be Done in the Aria Automation Service Broker UI)
 ```
-# kubectl create -f oc-tkg-cluster.yaml
+kubectl create -f oc-tkg-cluster.yaml
 ```
 Note: The oc-tkg-cluster.yaml is included in the git repo ( Modify it according to your setup)
 
@@ -153,14 +153,14 @@ kubectl vsphere login --server=https://$SC_IP --tanzu-kubernetes-cluster-name Yo
 
 ## 9. Switch Context to your TKG Cluster as your default context.
 ```
-# kubectl config use-context ccs:moad:open-cart
+kubectl config use-context ccs:moad:open-cart
 ```
 Note: You will be automatically switched to your TKG Cluster Context upon login but you can always return back to your TKG Context 
 
 ## 10. Create an allow all Pod Security Policy
 This shouldn't be done in production, but for a quick start, this will bind all authenticated users to run any type of container
 ```
-# kubectl create clusterrolebinding default-tkg-admin-privileged-binding --clusterrole=psp:vmware-system-privileged --group=system:authenticated
+kubectl create clusterrolebinding default-tkg-admin-privileged-binding --clusterrole=psp:vmware-system-privileged --group=system:authenticated
 ```
 
 ## 11. Deploy the Opencart Frontend using Helm packaged by Bitnami
@@ -174,7 +174,7 @@ https://bitnami.com/stack/opencart/helm
 ### B. Install the Opencart Helm chart with Custom options to disable the embedded Maria Database and specify our own parameters
 for the Opencart username and password, the MySQL External Database, the Configured MySQL Database username and password and finally the database name. 
 ```
-# helm install --namespace default my-open-cart bitnami/opencart --set opencartUsername="demouser",opencartPassword="VMware1!",externalDatabase.host="10.176.193.6",externalDatabase.user="ocuser",externalDatabase.password="VMware1!",externalDatabase.database="opencart",mariadb.enabled="false"
+helm install --namespace default my-open-cart bitnami/opencart --set opencartUsername="demouser",opencartPassword="VMware1!",externalDatabase.host="10.176.193.6",externalDatabase.user="ocuser",externalDatabase.password="VMware1!",externalDatabase.database="opencart",mariadb.enabled="false"
 ```
 Note: The External Database IP is from step 4, the IP address for the MySQL Service provisioned via the VM Service.
 
@@ -203,7 +203,7 @@ Output Example :
 ### C. Document the LoadBalancer IP once its generated - > 10.176.193.17 by running :
 
 ```
-# kubectl get svc --namespace default -w my-open-cart-opencart
+kubectl get svc --namespace default -w my-open-cart-opencart
 NAME                    TYPE           CLUSTER-IP     EXTERNAL-IP     PORT(S)                      AGE
 my-open-cart-opencart   LoadBalancer   10.96.69.234   10.176.193.17   80:30049/TCP,443:32309/TCP   2m3s
 ```
@@ -211,16 +211,16 @@ Note: Press Ctrl-C when the External-IP is populated to get out of watch paramet
 
 ### D. Execute the 4 provided Export commands to use with the upgrade command variables being used in the next step
 ```
-# export APP_HOST=$(kubectl get svc --namespace default my-open-cart-opencart --template "{{ range (index .status.loadBalancer.ingress 0) }}{{ . }}{{ end }}")
-# export APP_PASSWORD=$(kubectl get secret --namespace default my-open-cart-opencart -o jsonpath="{.data.opencart-password}" | base64 -d)
-# export DATABASE_ROOT_PASSWORD=$(kubectl get secret --namespace default my-open-cart-opencart-externaldb -o jsonpath="{.data.mariadb-root-password}" | base64 -d)
-# export APP_DATABASE_PASSWORD=$(kubectl get secret --namespace default my-open-cart-opencart-externaldb -o jsonpath="{.data.mariadb-password}" | base64 -d)
+export APP_HOST=$(kubectl get svc --namespace default my-open-cart-opencart --template "{{ range (index .status.loadBalancer.ingress 0) }}{{ . }}{{ end }}")
+export APP_PASSWORD=$(kubectl get secret --namespace default my-open-cart-opencart -o jsonpath="{.data.opencart-password}" | base64 -d)
+export DATABASE_ROOT_PASSWORD=$(kubectl get secret --namespace default my-open-cart-opencart-externaldb -o jsonpath="{.data.mariadb-root-password}" | base64 -d)
+export APP_DATABASE_PASSWORD=$(kubectl get secret --namespace default my-open-cart-opencart-externaldb -o jsonpath="{.data.mariadb-password}" | base64 -d)
 ```
 
 ### E. Complete your OpenCart deployment by running the Helm upgrade so we can update our deployement with the Application service IP ( aka $APP_HOST )
 
 ```
-# helm upgrade --namespace default my-open-cart bitnami/opencart --set opencartPassword=$APP_PASSWORD,opencartHost=$APP_HOST,service.type=LoadBalancer,mariadb.enabled="false",externalDatabase.host="10.176.193.6",externalDatabase.user="ocuser",externalDatabase.password="VMware1!",externalDatabase.database="opencart"
+helm upgrade --namespace default my-open-cart bitnami/opencart --set opencartPassword=$APP_PASSWORD,opencartHost=$APP_HOST,service.type=LoadBalancer,mariadb.enabled="false",externalDatabase.host="10.176.193.6",externalDatabase.user="ocuser",externalDatabase.password="VMware1!",externalDatabase.database="opencart"
 ```
 Note: Will need to do a few updates to the command line similar to the above upgrade command before you execute the helm upgrade command. you need to update your repo to bitnami/opencart instead of my-repo/opencart and add double quotes to all the values except the variables. 
 
@@ -255,7 +255,7 @@ APP VERSION: 4.0.1-1
 ### F. Query your Opencart Objects before accessing the Opencart application to make sure the open cart is running
 
 ```
-# kubectl get all
+kubectl get all
 
 NAME                                         READY   STATUS    RESTARTS   AGE
 pod/my-open-cart-opencart-7cd46d854c-rlkjp   1/1     Running   0          81s
@@ -273,12 +273,12 @@ replicaset.apps/my-open-cart-opencart-7cd46d854c   1         1         1       8
 
 ```
 ```
-# kubectl get pvc
+kubectl get pvc
 NAME                             STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS                    AGE
 my-open-cart-opencart-opencart   Bound    pvc-5eedeed0-db29-40e6-b05a-4d32d4e1ddbd   8Gi        RWO            tmm-kubernetes-storage-policy   3m32s
 ```
 ```
-# kubectl get secrets
+kubectl get secrets
 NAME                                 TYPE                                  DATA   AGE
 default-token-j8r9z                  kubernetes.io/service-account-token   3      126m
 my-open-cart-opencart                Opaque                                1      5m4s
