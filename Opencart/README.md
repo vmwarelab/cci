@@ -10,7 +10,7 @@ Check the following resources for more information on CCI:
 - CCI Blog: https://bit.ly/3UQE8bh
 - CCI Documentation: https://bit.ly/3UNKKXW
 
-## What Is OpenCart?
+## What is OpenCart?
 
 Opencart is an easy to-use, powerful, Open Source online store management program that can manage multiple online stores from a single back-end. Administrative area simply by filling in forms and clicking Save. There are many professionally-written extensions available to customize the store to your needs.
 
