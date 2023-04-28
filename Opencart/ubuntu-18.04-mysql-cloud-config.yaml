@@ -33,7 +33,7 @@
 
  runcmd:
    - export DEBIAN_FRONTEND=noninteractive
-   - USER=Your_DB_User
+   - USER=ocuser
    - PASS=Your_DB_User_Password
    - hostnamectl set-hostname Your_VM_Host_Name
    - echo "mysql-server-5.7 mysql-server/root_password password root" | sudo debconf-set-selections
