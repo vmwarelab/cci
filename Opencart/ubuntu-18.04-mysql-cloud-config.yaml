@@ -1,0 +1,54 @@
+ #cloud-config
+ repo_update: true
+ repo_upgrade: all
+ apt_source:
+   - source: deb http://archive.ubuntu.com/ubuntu main universe multiverse restricted
+
+ packages:
+   - mysql-server-5.7
+   - mysql-client
+   - unzip
+   - open-vm-tools
+
+ users:
+   - name: Your_Sudo_User_name
+     sudo: ['ALL=(ALL) NOPASSWD:ALL']
+     groups: sudo
+     shell: /bin/bash
+     ssh_authorized_keys:
+       - Your_User_SSH_Authorized_Key
+   - name: ocuser
+     sudo: ['ALL=(ALL) NOPASSWD:ALL']
+     groups: sudo
+     shell: /bin/bash
+
+ write_files:
+   - path: /etc/cron.hourly/oc_cleanup
+     owner: root
+     permissions: '0777'
+     content: "mysql -e 'use opencart; create table oc_session_copy like oc_session; drop table oc_session; rename table oc_session_copy to     oc_session;'"
+   - path: /etc/hosts
+     content: 127.0.0.1 oc-mysql
+     append: true
+
+ runcmd:
+   - export DEBIAN_FRONTEND=noninteractive
+   - USER=Your_DB_User
+   - PASS=Your_DB_User_Password
+   - hostnamectl set-hostname Your_VM_Host_Name
+   - echo "mysql-server-5.7 mysql-server/root_password password root" | sudo debconf-set-selections
+   - echo "mysql-server-5.7 mysql-server/root_password_again password root" | sudo debconf-set-selections
+   - echo "[client]" >> /etc/mysql/mysql.conf.d/mysqld.cnf
+   - echo "user=root" >> /etc/mysql/mysql.conf.d/mysqld.cnf
+   - echo "password=root" >> /etc/mysql/mysql.conf.d/mysqld.cnf
+   - echo "user=$USER" >> /etc/mysql/mysql.conf.d/mysqld.cnf
+   - echo "password=$PASS" >> /etc/mysql/mysql.conf.d/mysqld.cnf
+   - sed -i 's/#slow/slow/g' /etc/mysql/mysql.conf.d/mysqld.cnf
+   - sed -i 's/#long_query_time/long_query_time/g' /etc/mysql/mysql.conf.d/mysqld.cnf
+   - sed -i 's/bind-address/#bind-address/g' /etc/mysql/mysql.conf.d/mysqld.cnf
+   - systemctl restart mysql
+   - mysql -u root -e "GRANT ALL ON *.* TO '$USER'@'%' IDENTIFIED BY '$PASS'"
+   - mysql -u root -e 'CREATE DATABASE opencart'
+   - mysql -u root -e 'USE opencart'
+   - mysql -u root -e 'flush privileges'
+   - echo 'Cloud-init is done!' >> /tmp/finished.txt
