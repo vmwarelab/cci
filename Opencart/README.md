@@ -20,7 +20,7 @@ For more details, check https://www.opencart.com/
 
 ## OpenCart Application Architecture
 
-![Alt text](images/cci%20opencart%20architecture.gif)
+![Alt text](images/2023-05-02_11-45-07.png)
 
 In this demo we will be leveraging the Cloud Consumption Interface ( CCI for Short) powered by Aria Automation and vSphere+ Subscription to deploy a two tier e-commerece Application called open-cart via deploying a Helm Chart packaged by Bitnami by VMware.
 
