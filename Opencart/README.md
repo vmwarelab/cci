@@ -20,9 +20,21 @@ For more details, check https://www.opencart.com/
 
 ## OpenCart Application Architecture
 
-![Alt text](images/open%20cart%20cci.png)
+![Alt text](images/cci%20opencart%20architecture.gif)
 
-We will be deploying a two tier Opencart Application where the backend Database is a MySQL Virtual Machine running on vsphere provisioned using the vSphere with Tanzu VM Service and the frontend using helm chart packaged by bitnami, deployed on a TKG Wordkload Cluster all of which done via the Cloud Consumption Interface as part of Aria Automation and vSphere+ subscription. 
+In this demo we will be leveraging the Cloud Consumption Interface ( CCI for Short) powered by Aria Automation and vSphere+ Subscription to deploy a two tier e-commerece Application called open-cart via deploying a Helm Chart packaged by Bitnami by VMware.
+
+The backend tier will be a Virtual Machine running a MySql Database provisioned on vSphere with Tanzu along with a Load balancer VM Service exposing both MySql on TCP port 3306 and SSH on TCP port 22 leverging the VM Service and VM Operator.
+
+
+The VM Service and VM Operator within vSphere with Tanzu uses a declarative Kubernetes CRDs based VM provisioning approach, an automatic load balancing service across multiple VMs and an industry standard cloud-init based guest OS customisation all along with administrative controls for things like VM Images (Content Libraries) and VM Classes ( VM Sizing ) for the vSphere administrators.
+
+
+The frontend tier POD and its Web LB service exposing http on port 80 will be deployed via the Bitnami Helm Chart with custom sets of parameters on a TKG Wordkload Cluster running that is within a dedicated Supervisor namesapce both of which will be provisioned using the Cloud Consumption Interface first
+
+the frontend pod will then connect and use the mySQL as its backend database via the database LB service.
+
+Finaly the consumer can the load the ecommerce website by connecting to the Frontend LB web service via its IP address or FQDN 
 
 ## Prerequisites 
 
