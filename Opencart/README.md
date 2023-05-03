@@ -59,7 +59,7 @@ kubectl ccs login -t $CCI_API_TOKEN --server $SERVER --skip-set-context --insecu
 ```
 Note: You can find a shell script for the above in cci/Yaml-Examples-And-Scripts/connect-cci-admin.sh or connect-cci-user.sh
       
-The main difference between the two is that the --skip-set-context parameter is set in the admin script only. 
+The main difference between the two is that the --skip-set-context parameter is set in the admin script.
 
 ```
 API Servers List based on your org region
