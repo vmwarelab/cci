@@ -53,7 +53,7 @@ Finaly the consumer can the load the ecommerce website by connecting to the Fron
 ## 1. Login into CCI as an Admin or User using the K8s CCI plugin
 
 ```
-export CCI_API_TOKEN=Your_Admin/User_Token
+export CCI_API_TOKEN=Your_Admin/User_API_Token
 export SERVER=Your_API_Server
 kubectl ccs login -t $CCI_API_TOKEN --server $SERVER --skip-set-context --insecure-skip-tls-verify
 ```
@@ -61,8 +61,8 @@ Note: You can find a shell script for the above in cci/Yaml-Examples-And-Scripts
       The main difference between the two is that the --skip-set-context parameter is set in the admin script. 
 
 ```
-API Servers List
-================
+API Servers List based on your org region
+=============================================
 United States    api.mgmt.cloud.vmware.com
 United Kingdom   uk.api.mgmt.cloud.vmware.com
 Japan            jp.api.mgmt.cloud.vmware.com
@@ -71,7 +71,7 @@ Germany          de.api.mgmt.cloud.vmware.com
 Australia        au.api.mgmt.cloud.vmware.com
 Canada           ca.api.mgmt.cloud.vmware.com
 Brazil           br.api.mgmt.cloud.vmware.com
-
+```
 
 
 ## 2. Switch Context to CCS as your default Context
