@@ -60,6 +60,20 @@ kubectl ccs login -t $CCI_API_TOKEN --server $SERVER --skip-set-context --insecu
 Note: You can find a shell script for the above in cci/Yaml-Examples-And-Scripts/connect-cci-admin.sh or connect-cci-user.sh
       The main difference between the two is that the --skip-set-context parameter is set in the admin script. 
 
+```
+API Servers List
+================
+United States    api.mgmt.cloud.vmware.com
+United Kingdom   uk.api.mgmt.cloud.vmware.com
+Japan            jp.api.mgmt.cloud.vmware.com
+Singapore        sg.api.mgmt.cloud.vmware.com
+Germany          de.api.mgmt.cloud.vmware.com
+Australia        au.api.mgmt.cloud.vmware.com
+Canada           ca.api.mgmt.cloud.vmware.com
+Brazil           br.api.mgmt.cloud.vmware.com
+
+
+
 ## 2. Switch Context to CCS as your default Context
 
 ```
