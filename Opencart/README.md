@@ -208,7 +208,12 @@ kubectl config use-context ccs:moad:open-cart
 Note: You will be automatically switched to your TKG Cluster Context upon login but you can always return back to your TKG Context 
 
 ## 10. Create an allow all Pod Security Policy
-This shouldn't be done in production, but for a quick start, this will bind all authenticated users to run any type of container
+
+Tanzu Kubernetes Grid Service provisions Tanzu Kubernetes clusters with the PodSecurityPolicy Admission Controller enabled. This means that pod security policy is required to deploy workloads.
+
+The following kubectl command creates a ClusterRoleBinding that grants access to authenticated users run a privileged set of workloads using the default PSP vmware-system-privileged.
+
+This shouldn't be done in production, but for a quick start, this will allow the deployment of privileged workloads cluster-wide.
 
 ```
 kubectl create clusterrolebinding default-tkg-admin-privileged-binding --clusterrole=psp:vmware-system-privileged --group=system:authenticated
