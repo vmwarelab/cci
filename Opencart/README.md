@@ -24,24 +24,27 @@ For more details, check https://www.opencart.com/
 
 In this demo, we will leverage the Cloud Consumption Interface ( CCI for Short) powered by Aria Automation and vSphere+ Subscription to deploy a two-tier Kubernetes-based e-commerce application called open-cart.
 
+In this Application architecture, the backend database tier consists of a Virtual Machine running a MySQL Database and a Load balancer Service exposing both MySQL on TCP port 3306 and SSH on TCP port 22, all while leveraging the VM Service and VM Operator.
 
-In this Application architecture, the backend database tier consists of a Virtual Machine running MySQL Database provisioned on vSphere with Tanzu and a Load balancer Service exposing both MySQL on TCP port 3306 and SSH TCP port 22 leveraging the VM Service and VM Operator.
+The VM Service and VM Operator within vSphere with Tanzu uses a declarative Kubernetes Custom Resource Definitions VM provisioning approach, an automatic load balancing service across multiple VMs and an industry-standard cloud-init-based guest OS customization, all along with administrative controls for things like VM Images (Content Libraries) and VM Classes ( VM Sizing ) for the vSphere administrators.
 
-The VM Service and VM Operator within vSphere with Tanzu uses a declarative Kubernetes CRDs-based VM provisioning approach, an automatic load balancing service across multiple VMs and industry-standard cloud-init-based guest OS customization, all along with administrative controls for things like VM Images (Content Libraries) and VM Classes ( VM Sizing ) for the vSphere administrators.
+The frontend web tier will consist of a Kubernetes pod and a Load balancer service exposing HTTP on TCP port 80 deployed via a Bitnami Helm Chart package with a custom set of parameters in the default namespace of a TKG Workload Cluster.
 
-The frontend web tier will consist of a Kubernetes pod and a Load balancer service exposing HTTP on TCP port 80 deployed via the Bitnami Helm Chart with a custom set of parameters on a TKG Workload Cluster running within a dedicated Supervisor Namespace.
+The provisioned Virtual Machine and TKG workload Cluster run within a dedicated Supervisor Namespace on Supervisor Cluster.
 
 The frontend pod will connect and use the MySQL VM as its backend database via the database LB service.
 
-Finally, the consumer can load the e-commerce website by connecting to the Frontend LB web service via its IP address or FQDN.
+Finally, the consumer can load the e-commerce website by connecting to the Frontend LB web service via its IP address.
 
-To summarize, before we begin, we will:
+To summarize, before we begin and in numerical order, we will:
 
 1. Provision a supervisor namespace.
 2. Provision a Virtual Machine Running MySQL and its Loadbalancer service. 
 3. Provision a TKG Workload Cluster 
 4. Deploy a Frontend Pod and its Load Balancer service.
 5. Connect to the e-commerce website application.
+
+All while leveraging the Cloud Consumption Interface(CCI).
 
 ## Prerequisites 
 
