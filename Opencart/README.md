@@ -9,6 +9,7 @@ Check the following resources for more information on CCI:
 - CCI Video : https://bit.ly/3UTfiYC
 - CCI Blog: https://bit.ly/3UQE8bh
 - CCI Documentation: https://bit.ly/3UNKKXW
+- CCI Video Series: https://bit.ly/3CT34Xv
 
 ## What is OpenCart?
 
