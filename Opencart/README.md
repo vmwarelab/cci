@@ -65,7 +65,7 @@ All while leveraging the Cloud Consumption Interface(CCI).
 ```
 export CCI_API_TOKEN=Your_Admin/User_API_Token
 export SERVER=Your_API_Server
-kubectl ccs login -t $CCI_API_TOKEN --server $SERVER --skip-set-context --insecure-skip-tls-verify
+kubectl cci login -t $CCI_API_TOKEN --server $SERVER --skip-set-context --insecure-skip-tls-verify
 ```
 Note: You can find a shell script for the above in cci/Yaml-Examples-And-Scripts/connect-cci-admin.sh or connect-cci-user.sh
       
@@ -86,12 +86,12 @@ Brazil           br.api.mgmt.cloud.vmware.com
 ```
 
 
-## 2. Switch Context to CCS as your default Context
+## 2. Switch Context to cci as your default Context
 
 ```
-kubectl config use-context ccs
+kubectl config use-context cci
 ```
-Note: the CCS context is the CCI managment context where you can create and manage all the CCI building blocks.
+Note: the cci context is the CCI managment context where you can create and manage all the CCI building blocks.
 
 ## 3. Create a Supervisor Namespace  
 ( Can also be Done in the Aria Automation Service Broker UI)
@@ -101,7 +101,7 @@ kubectl create -f oc-svns.yaml
 ```
 Yaml Template Example  
 ```
-apiVersion: infrastructure.ccs.vmware.com/v1alpha1
+apiVersion: infrastructure.cci.vmware.com/v1alpha1
 kind: SupervisorNamespace
 metadata:
   name: Your_Supervisor_Namespaces
@@ -117,15 +117,15 @@ Note: The oc-svns.yaml is included in the git repo.( Modify it according to your
 ## 4. Create your context 
 
 ```
-kubectl ccs set-context --project moad --supervisor-namespace open-cart
+kubectl cci set-context --project moad --supervisor-namespace open-cart
 ```
 Note: You only have to create your context if you login with --skip-set-context option.
       Without it the context will be auto created based on your project membership when you login into cci.
 
-## 5. Switch Context to your Supervisor Name ccs:moad:open-cart as your default context.
+## 5. Switch Context to your Supervisor Name cci:moad:open-cart as your default context.
 
 ```
-kubectl config use-context ccs:moad:open-cart
+kubectl config use-context cci:moad:open-cart
 ```
 
 ## 6. Deploy your MySQL Database using VM Service 
@@ -213,7 +213,7 @@ kubectl vsphere login --server=https://$SC_IP --tanzu-kubernetes-cluster-name Yo
 ## 9. Switch Context to your TKG Cluster as your default context.
 
 ```
-kubectl config use-context ccs:moad:open-cart
+kubectl config use-context cci:moad:open-cart
 ```
 Note: You will be automatically switched to your TKG Cluster Context upon login but you can always return back to your TKG Context 
 
