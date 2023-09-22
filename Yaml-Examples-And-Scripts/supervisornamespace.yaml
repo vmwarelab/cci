@@ -1,4 +1,4 @@
-apiVersion: infrastructure.ccs.vmware.com/v1alpha1
+apiVersion: infrastructure.cci.vmware.com/v1alpha1
 kind: SupervisorNamespace
 metadata:
   name: Your_Supervisor_Namespaces

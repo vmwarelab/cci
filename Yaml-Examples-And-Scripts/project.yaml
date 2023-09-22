@@ -1,4 +1,4 @@
-apiVersion: project.ccs.vmware.com/v1alpha1
+apiVersion: project.cci.vmware.com/v1alpha1
 kind: Project
 metadata:
   name: Your_Project_Name

@@ -1,4 +1,4 @@
-apiVersion: topology.ccs.vmware.com/v1alpha1
+apiVersion: topology.cci.vmware.com/v1alpha1
 kind: Region
 metadata:
   name: Your_Region_Name
