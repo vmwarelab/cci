@@ -1,5 +1,5 @@
 
-apiVersion: topology.ccs.vmware.com/v1alpha1
+apiVersion: topology.cci.vmware.com/v1alpha1
 kind: RegionBinding
 metadata:
   name: ${REGION}
