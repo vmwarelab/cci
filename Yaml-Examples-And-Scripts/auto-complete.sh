@@ -17,6 +17,9 @@ echo 'alias k=kubectl' >>~/.bashrc
 echo 'complete -F __start_kubectl k' >>~/.bashrc
 echo 'alias kx=kubectx' >>~/.bashrc
 echo 'complete -F __start_kubectx kx' >>~/.bashrc
+echo 'alias kn=kubens' >>~/.bashrc
+echo 'complete -F __start_kubens kn' >>~/.bashrc
+
 . ~/.bashrc
 
 
