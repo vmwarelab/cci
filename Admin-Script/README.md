@@ -1,15 +1,15 @@
 ## Cloud Consumption Interface powered by Aria Automation
 
-This script should be used alongside the instructions for connecting a cluster to vRA as documented in Documentation 
+This script should be used alongside the instructions for connecting a cluster to Aria Automation as outlined in the official Aria Automation documentation.
 
 
 You need to follow the instructions to
-* Deploy a vSphere testbed (or use an existing one)
-* Deploy the Cloud Proxy
+* Deploy a vSphere testbed infrastructure (or use an existing one)
+* Deploy the Cloud Proxy on to the testbed infrastructure when using Aria Automation SaaS
 * Create the Cloud Account in vRA
 * Make sure you have kubectl and the cci plugin installed
 
-You can run the script `create.sh` after updating the variables in the file and logging in.
+You can run the script `create.sh` after updating the variables in the script file and logging in.
 
 Edit these values in the script.
 
