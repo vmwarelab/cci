@@ -5,4 +5,4 @@ export CCI_USER_NAME=Your_User_Name
 export KUBECTL_VSPHERE_PASSWORD=Your_Password
 export KUBECTL_CCI_PASSWORD=Your_Password
 
-kubectl cci login --server vcf-auto.corp.vmbeans.com --username $CCI_USER_NAME --project $PROJECT --tanzu-kubernetes-cluster-namespace $NAMESPACE --tanzu-kubernetes-cluster-name $TKG_CLUSTER --insecure-skip-tls-verify
+kubectl cci login --server vcfa_fqdn_ip --username $CCI_USER_NAME --project $PROJECT --tanzu-kubernetes-cluster-namespace $NAMESPACE --tanzu-kubernetes-cluster-name $TKG_CLUSTER --insecure-skip-tls-verify
